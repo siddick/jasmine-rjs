@@ -13,6 +13,7 @@
   <script src="<%= js_file %>" type="text/javascript"></script>
   <% end %>
   <script>
+    require.config({ baseUrl: '/assets' });
     require(<%= spec_files.to_json.html_safe %>, window.onload);
     window.onload = null;
   </script>

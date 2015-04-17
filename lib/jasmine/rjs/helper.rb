@@ -1,4 +1,5 @@
 require 'jasmine'
+require 'requirejs-rails'
 
 module Jasmine
   class Configuration

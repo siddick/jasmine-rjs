@@ -2,6 +2,8 @@
 
 Rails plugin to integrate Jasmine, Require.js and Karma.
 
+[![Gem Version](https://badge.fury.io/rb/jasmine-rjs.svg)](http://badge.fury.io/rb/jasmine-rjs)
+
 ## Installation
 
 Add this line to your Rails application's Gemfile:

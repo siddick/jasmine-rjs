@@ -9,13 +9,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["siddick"]
   spec.email         = ["siddick@gmail.com"]
 
-  spec.summary       = %q{Integrate require.js with jasmine testing.}
-  spec.description   = %q{Integrate require.js with jasmine testing.}
+  spec.summary       = %q{Rails plugin to integrate Jasmine, Require.js and Karma.}
+  spec.description   = %q{Rails plugin to integrate Jasmine, Require.js and Karma.}
   spec.homepage      = "https://github.com/siddick/jasmine-rjs"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency "jasmine", ">= 2.2.0"

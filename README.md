@@ -1,38 +1,55 @@
-# Jasmine::Rjs
+# Jasmine + Require.js + Karma
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jasmine/rjs`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Rails plugin to integrate Jasmine, Require.js and Karma.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your Rails application's Gemfile:
 
 ```ruby
-gem 'jasmine-rjs'
+gem 'jasmine-rjs', group: [:development, :test]         # Jasmine testing
+gem 'requirejs-rails'                                   # For helper methods and rake tasks
 ```
 
 And then execute:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install jasmine-rjs
+```bash
+rails g jasmine:install                         # Install default jasmine configuration
+npm install karma karma-cli \
+            karma-jasmine karma-requirejs \
+            karma-phantomjs-launcher -g         # To test with karma
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+To start karma watcher:
 
-## Development
+```bash
+rake jasmine:karma
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+To test from cli:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```bash
+rake jasmine:ci
+```
+
+## Configuration
+
+To override karma configuration, create file `karma.conf.js`:
+
+```javascript
+module.exports = function(config) {
+   config.set({
+       logLevel: config.LOG_INFO,
+       browsers: ['Chrome', 'PhantomJS']
+   });
+};
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/jasmine-rjs/fork )
+1. Fork it ( https://github.com/siddick/jasmine-rjs/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

@@ -5,22 +5,19 @@ DefaultConfigFile = 'karma.conf.js'
 
 namespace :jasmine do
   task :run_karma, [:config_file] do |t, args|
-    config_file = args[:config_file]
-    port = Jasmine.config.port(:server)
-
-    if config_file
-      config_file = File.expand_path(config_file)
-    elsif File.exist? DefaultConfigFile
-      config_file = File.expand_path(DefaultConfigFile)
-    end
+    config_file =
+      if args[:config_file]
+        args[:config_file]
+      elsif File.exist? DefaultConfigFile
+        DefaultConfigFile
+      end
 
     Jasmine::wait_for_listener(Jasmine.config.port(:server), 'jasmine server')
 
-    if config_file
-      system("JASMINE_PORT=#{port} CONFIG_FILE=#{config_file} karma start #{BaseConfigFile}")
-    else
-      system("JASMINE_PORT=#{port} karma start #{BaseConfigFile}")
-    end
+    ENV["JASMINE_PORT"] = Jasmine.config.port(:server).to_s
+    ENV["CONFIG_FILE"] = File.expand_path(config_file) if config_file
+
+    system("karma start #{BaseConfigFile}")
   end
 
   desc 'run karma & jasmine service'
